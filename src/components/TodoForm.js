@@ -1,19 +1,24 @@
 export default function TodoForm({ $target, onSubmit }) {
     const $form = document.createElement('form');
 
-    onSubmit('할일4');
-
-    $form.innerHTML = `
-		<input />
-		<button>추가</button>
-	`;
+    this.render = () => {
+        $form.innerHTML = `
+            <input />
+            <button>추가</button>
+        `;
+    };
 
     $form.addEventListener('submit', e => {
         e.preventDefault();
         const $input = $form.querySelector('input');
         const text = $input.value;
-        onSubmit(text);
+        if (text.length > 0) {
+            onSubmit(text);
+            $input.value = '';
+        }
     });
 
     $target.appendChild($form);
+
+    this.render();
 }
